@@ -1,8 +1,10 @@
 package com.example.textbookapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +36,19 @@ class UserSignUpActivity : AppCompatActivity() {
 
         btnSignUp.setOnClickListener {
             validateInput(tilName, etName, tilEmail, etEmail, tilPassword, etPassword)
+        }
+    }
+
+    //Object used to store users in-memory when they sign up
+    object InMemoryUserStore{
+        private val users = mutableMapOf<String, String>()
+
+        fun signUp(email: String, password: String) : Boolean{
+            if (users.containsKey(email)){
+                return false
+            }
+            users[email] = password
+            return true
         }
     }
 
@@ -80,6 +95,15 @@ class UserSignUpActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
+            if(InMemoryUserStore.signUp(email, password)){
+                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, UserLoginActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }else{
+                Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
