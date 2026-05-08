@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TextbookApp">
         <activity
-            android:name=".HomeActivity"
+            android:name=".SellerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserHomeActivity"
             android:exported="false" />
         <activity
             android:name=".SellerLoginActivity"

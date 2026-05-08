@@ -9,14 +9,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class UserLoginActivity : AppCompatActivity() {
+
+    private lateinit var auth : Authentication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_user_login)
+
+        // Initialize Authentication ViewModel
+        auth = ViewModelProvider(this)[Authentication::class.java]
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,16 +41,6 @@ class UserLoginActivity : AppCompatActivity() {
             validateInput(tilEmail, etEmail, tilPassword, etPassword)
         }
     }
-
-    object InMemoryUserStore{
-        private val users = mutableMapOf<String, String>()
-
-        fun login(email: String, password: String) : Boolean{
-            return users[email] == password
-
-        }
-    }
-
     private fun validateInput(
         tilEmail: TextInputLayout, etEmail: TextInputEditText,
         tilPassword: TextInputLayout, etPassword: TextInputEditText
@@ -77,9 +74,9 @@ class UserLoginActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
-            if (InMemoryUserStore.login(email, password)) {
+            if (auth.login(email, password)) {
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, UserHomeActivity::class.java)
                 startActivity(intent)
                 finish()
 

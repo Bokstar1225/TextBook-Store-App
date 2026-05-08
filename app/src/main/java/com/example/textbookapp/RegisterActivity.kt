@@ -25,12 +25,14 @@ class RegisterActivity : AppCompatActivity() {
             // Handle buyer button click
             val intent = Intent(this, UserSignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         sellerButton.setOnClickListener {
             // Handle seller button click
             val intent = Intent(this, SellerSignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

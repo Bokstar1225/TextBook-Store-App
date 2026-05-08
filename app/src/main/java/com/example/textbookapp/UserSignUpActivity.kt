@@ -9,15 +9,20 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class UserSignUpActivity : AppCompatActivity() {
 
+    private lateinit var auth : Authentication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_user_sign_up)
+
+        // Initialize Authentication ViewModel
+        auth = ViewModelProvider(this)[Authentication::class.java]
         
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -38,20 +43,6 @@ class UserSignUpActivity : AppCompatActivity() {
             validateInput(tilName, etName, tilEmail, etEmail, tilPassword, etPassword)
         }
     }
-
-    //Object used to store users in-memory when they sign up
-    object InMemoryUserStore{
-        private val users = mutableMapOf<String, String>()
-
-        fun signUp(email: String, password: String) : Boolean{
-            if (users.containsKey(email)){
-                return false
-            }
-            users[email] = password
-            return true
-        }
-    }
-
     private fun validateInput(
         tilName: TextInputLayout, etName: TextInputEditText,
         tilEmail: TextInputLayout, etEmail: TextInputEditText,
@@ -95,7 +86,7 @@ class UserSignUpActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
-            if(InMemoryUserStore.signUp(email, password)){
+            if(auth.signUp(email, password)){
                 Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, UserLoginActivity::class.java)
                 startActivity(intent)
