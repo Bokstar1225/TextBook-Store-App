@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5E9DA"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="28dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="135dp"
+            android:layout_height="112dp"
+            android:contentDescription="@string/app_icon"
+            android:src="@drawable/africa" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_heading"
+            android:textSize="33sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sub_heading"
+            android:textSize="20sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="21dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="259dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/main_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_screen_image" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="21dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/text"
+            android:textSize="18sp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="42dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
+            android:layout_width="329dp"
+            android:layout_height="51dp"
+            android:text="@string/button_text"
+            app:backgroundTint="#8B6B5A"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

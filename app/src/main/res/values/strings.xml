@@ -1,0 +1,25 @@
+<resources>
+    <!--MainActivity String Resources-->
+    <string name="app_name">Textbook App</string>
+    <string name="app_icon">Africa Content Icon</string>
+    <string name="main_heading">BookUbuntu</string>
+    <string name="sub_heading">Your Digital Gateway to Knowledge</string>
+    <string name="main_image">Main Screen Image</string>
+    <string name="text">Welcome to BookUbuntu! Connect
+        with other students to acquire
+        textbooks and study material tailored
+        to your course</string>
+    <string name="button_text">Get Started</string>
+
+    <!--RegisterActivity String Resources-->
+    <string name="register_main_heading">Register As</string>
+    <string name="buyer_btn_text">Proceed as Buyer</string>
+    <string name="seller_btn_text">Proceed as Seller</string>
+
+    <!--UserSignUpActivity String Resources-->
+    <string name="sign_up_main_heading">Sign Up</string>
+    <string name="name_hint">Name</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+
+</resources>
