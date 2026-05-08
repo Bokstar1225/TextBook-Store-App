@@ -21,5 +21,12 @@
     <string name="name_hint">Name</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
+    <string name="sign_up_btn_text">Sign Up</string>
 
+    <!--SellerSignUpActivity String Resources-->
+    <string name="sign_up_main_heading2">Sign Up</string>
+    <string name="name_hint2">Name</string>
+    <string name="email_hint2">Email</string>
+    <string name="password_hint2">Password</string>
+    <string name="sign_up_btn_text2">Sign Up</string>
 </resources>

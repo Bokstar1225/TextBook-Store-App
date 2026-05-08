@@ -1,8 +1,10 @@
 package com.example.textbookapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,6 +38,20 @@ class SellerSignUpActivity : AppCompatActivity() {
             validateInput(tilName, etName, tilEmail, etEmail, tilPassword, etPassword)
         }
     }
+
+    object InMemoryUserStore{
+        private val users = mutableMapOf<String, String>()
+
+        fun signUp(email: String, password: String) : Boolean{
+            if(users.containsKey(email)){
+                return false
+            }else{
+                users[email] = password
+                return true
+            }
+        }
+    }
+
 
     private fun validateInput(
         tilName: TextInputLayout, etName: TextInputEditText,
@@ -80,6 +96,16 @@ class SellerSignUpActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
+            // Proceed with registration logic
+            if(UserSignUpActivity.InMemoryUserStore.signUp(email, password)){
+                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, UserLoginActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }else{
+                Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
