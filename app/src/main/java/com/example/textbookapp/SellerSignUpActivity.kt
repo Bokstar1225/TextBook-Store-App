@@ -96,10 +96,9 @@ class SellerSignUpActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
-            // Proceed with registration logic
-            if(UserSignUpActivity.InMemoryUserStore.signUp(email, password)){
+            if(InMemoryUserStore.signUp(email, password)){
                 Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, UserLoginActivity::class.java)
+                val intent = Intent(this, SellerLoginActivity::class.java)
                 startActivity(intent)
                 finish()
 
