@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The white background of the input -->
+    <solid android:color="#FAF5EF" />
+
+    <!-- The rounded corners (approx 10dp) -->
+    <corners android:radius="19dp" />
+</shape>

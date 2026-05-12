@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_book_cover"
+        android:layout_width="106dp"
+        android:layout_height="180dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tv_book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Book Title"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_book_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="R0.00"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Requires an XML shape drawable for the brown rounded background -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_to_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:text="Add to Cart"
+        android:layout_gravity="center_horizontal"
+        android:textSize="12sp"
+        app:backgroundTint="#8B6B5A"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914" />
+
+</LinearLayout>
