@@ -1,22 +1,29 @@
 package com.example.textbookapp
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class Cart : ViewModel() {
-    // The private mutable list that holds the actual data
     private val _cartItems = MutableLiveData<MutableList<Book>>(mutableListOf())
-
-    // The public immutable LiveData that the Activity will observe
     val cartItems: LiveData<MutableList<Book>> get() = _cartItems
 
+    // NEW: Specific event for when an item is added
+    private val _itemAddedEvent = MutableLiveData<Book?>()
+    val itemAddedEvent: LiveData<Book?> get() = _itemAddedEvent
+
     fun addToCart(book: Book) {
-        // Get the current list, add the new book, and update the LiveData
         val currentList = _cartItems.value ?: mutableListOf()
         currentList.add(book)
         _cartItems.value = currentList
+        
+        // Trigger the event
+        _itemAddedEvent.value = book
+    }
+
+    // Call this after showing the message to "consume" the event
+    fun consumeItemAddedEvent() {
+        _itemAddedEvent.value = null
     }
 
     fun getCartItemCount(): Int {

@@ -6,13 +6,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class BookAdapter(
-    private var bookList: List<Book>,
-    private val onAddToCartClick: (Book) -> Unit
+    private val fullBookList: List<Book>,
+    private val buttonText: String = "Add to Cart",
+    private val showButton: Boolean = true,
+    private val onAddToCartClick: (Book) -> Unit = {}
 ) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+
+    private var displayedBookList: List<Book> = fullBookList
 
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverImage: ImageView = itemView.findViewById(R.id.iv_book_cover)
@@ -27,26 +30,31 @@ class BookAdapter(
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        val book = bookList[position]
+        val book = displayedBookList[position]
         holder.titleText.text = book.title
         holder.priceText.text = book.price
         holder.coverImage.setImageResource(book.imageResId)
-
-        holder.addToCartButton.setOnClickListener {
-            onAddToCartClick(book)
-            Toast.makeText(holder.itemView.context, "${book.title} added to cart!", Toast.LENGTH_SHORT).show()
+        
+        if (showButton) {
+            holder.addToCartButton.visibility = View.VISIBLE
+            holder.addToCartButton.text = buttonText
+            holder.addToCartButton.setOnClickListener {
+                onAddToCartClick(book)
+            }
+        } else {
+            holder.addToCartButton.visibility = View.GONE
         }
     }
 
     override fun getItemCount(): Int {
-        return bookList.size
+        return displayedBookList.size
     }
 
-    fun filter(query : String){
-        bookList = if(query.isEmpty()){
-            bookList.toMutableList()
-        }else{
-            bookList.filter { it.title.contains(query, ignoreCase = true) }.toMutableList()
+    fun filter(query: String) {
+        displayedBookList = if (query.isEmpty()) {
+            fullBookList
+        } else {
+            fullBookList.filter { it.title.contains(query, ignoreCase = true) }
         }
         notifyDataSetChanged()
     }

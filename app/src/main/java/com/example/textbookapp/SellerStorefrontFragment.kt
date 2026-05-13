@@ -5,55 +5,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SellerStorefrontFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SellerStorefrontFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var storefront: Storefront
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_seller_storefront, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_seller_storefront, container, false)
+        storefront = ViewModelProvider(requireActivity())[Storefront::class.java]
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SellerStorefrontFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SellerStorefrontFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Section 1: Books Your Selling
+        val rvSelling: RecyclerView = view.findViewById(R.id.rv_selling_items)
+        rvSelling.layoutManager = GridLayoutManager(requireContext(), 2)
+        
+        storefront.storeItems.observe(viewLifecycleOwner) { items ->
+            // Use BookAdapter but hide the button as per the UI image
+            rvSelling.adapter = BookAdapter(items, showButton = false)
+        }
+
+        // Section 2: Books You Have Sold
+        val rvSold: RecyclerView = view.findViewById(R.id.rv_sold_items)
+        rvSold.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        storefront.soldItems.observe(viewLifecycleOwner) { items ->
+            rvSold.adapter = BookAdapter(items, showButton = false)
+        }
+
+        // Initial setup for Sold items (Demo data to match image)
+        if (storefront.soldItems.value.isNullOrEmpty()) {
+             val demoSold = listOf(
+                Book(3, "Engineering Fundamentals", "R1700", R.drawable.engineering_textbook),
+                Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
+            )
+            demoSold.forEach { storefront.soldItems.value?.add(it) }
+        }
+
+        return view
     }
 }
