@@ -31,4 +31,31 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="register">Register</string>
+
+    <!--UserMainActivity String Resources-->
+    <string name="home_icon_text">Home</string>
+    <string name="enquire_icon_text">Enquire</string>
+    <string name="cart_icon_text">Cart</string>
+    <string name="home_icon_imageDescription">Image of Home Icon</string>
+    <string name="enquire_icon_imageDescription">Image of Enquire Icon</string>
+    <string name="cart_icon_imageDescription">Image of Cart Icon</string>
+
+    <!--UserHomeFragment String Resources-->
+    <string name="search_hint">Search by ISBN, Title, or Code</string>
+    <string name="categories_text">Categories</string>
+    <string name="all_text">All</string>
+    <string name="newest_text">Newest</string>
+    <string name="science_text">Science</string>
+    <string name="technology_text">Technology</string>
+
+    <!--UserEnquireFragment String Resources-->
+    <string name="enquire_text">Enquire</string>
+    <string name="enquire_text2">Have a question, need more information, or want to know more about a certain book? Click the button></string>
+    <string name="enquire_btn_text">Enquire</string>
+
+    <!--UserCartFragment String Resources-->
+    <string name="cart_text">Cart</string>
+    <string name="checkout_btn_text">Checkout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

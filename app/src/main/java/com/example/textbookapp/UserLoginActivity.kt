@@ -76,7 +76,7 @@ class UserLoginActivity : AppCompatActivity() {
             // Proceed with registration logic
             if (auth.login(email, password)) {
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, UserHomeActivity::class.java)
+                val intent = Intent(this, UserMainActivity::class.java)
                 startActivity(intent)
                 finish()
 

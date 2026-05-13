@@ -6,9 +6,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class BookAdapter(private val bookList: List<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(
+    private var bookList: List<Book>,
+    private val onAddToCartClick: (Book) -> Unit
+) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverImage: ImageView = itemView.findViewById(R.id.iv_book_cover)
         val titleText: TextView = itemView.findViewById(R.id.tv_book_title)
@@ -28,11 +33,21 @@ class BookAdapter(private val bookList: List<Book>) : RecyclerView.Adapter<BookA
         holder.coverImage.setImageResource(book.imageResId)
 
         holder.addToCartButton.setOnClickListener {
-            // Handle add to cart logic here
+            onAddToCartClick(book)
+            Toast.makeText(holder.itemView.context, "${book.title} added to cart!", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun getItemCount(): Int {
         return bookList.size
+    }
+
+    fun filter(query : String){
+        bookList = if(query.isEmpty()){
+            bookList.toMutableList()
+        }else{
+            bookList.filter { it.title.contains(query, ignoreCase = true) }.toMutableList()
+        }
+        notifyDataSetChanged()
     }
 }
