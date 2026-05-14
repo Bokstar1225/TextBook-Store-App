@@ -19,7 +19,7 @@
             android:layout_height="45dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:contentDescription="App Logo"
+            android:contentDescription="@string/main_image"
             android:src="@drawable/africa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,9 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Books Your Selling"
+            android:text="@string/selling_text"
             android:textSize="28sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -52,9 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Books You Have Sold"
+            android:text="@string/sold_text"
             android:textSize="28sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/rv_selling_items" />
 
