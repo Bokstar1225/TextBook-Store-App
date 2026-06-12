@@ -12,6 +12,7 @@ class BookAdapter(
     private val fullBookList: List<Book>,
     private val buttonText: String = "Add to Cart",
     private val showButton: Boolean = true,
+    private val onBookClick: (Book) -> Unit = {},
     private val onAddToCartClick: (Book) -> Unit = {}
 ) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
@@ -34,6 +35,10 @@ class BookAdapter(
         holder.titleText.text = book.title
         holder.priceText.text = book.price
         holder.coverImage.setImageResource(book.imageResId)
+        
+        holder.coverImage.setOnClickListener {
+            onBookClick(book)
+        }
         
         if (showButton) {
             holder.addToCartButton.visibility = View.VISIBLE

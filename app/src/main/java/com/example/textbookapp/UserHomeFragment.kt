@@ -33,15 +33,25 @@ class UserHomeFragment : Fragment() {
             Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
         )
 
-        val adapter = BookAdapter(books) { selectedBook ->
-            cart.addToCart(selectedBook)
-        }
+        val adapter = BookAdapter(
+            fullBookList = books,
+            onBookClick = { selectedBook ->
+                val detailFragment = BookDetailFragment.newInstance(selectedBook)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, detailFragment)
+                    .addToBackStack(null)
+                    .commit()
+            },
+            onAddToCartClick = { selectedBook ->
+                cart.addToCart(selectedBook)
+            }
+        )
         recyclerView.adapter = adapter
 
-        cart.cartItems.observe(viewLifecycleOwner) { currentCart ->
-            if (currentCart.isNotEmpty()) {
-                val latestBook = currentCart.last()
-                Toast.makeText(requireContext(), "${latestBook.title} added! (${currentCart.size} items in cart)", Toast.LENGTH_SHORT).show()
+        cart.itemAddedEvent.observe(viewLifecycleOwner) { book ->
+            book?.let {
+                Toast.makeText(requireContext(), "${it.title} added to cart!", Toast.LENGTH_SHORT).show()
+                cart.consumeItemAddedEvent()
             }
         }
 
@@ -51,9 +61,9 @@ class UserHomeFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 adapter.filter(p0.toString())
-        }
+            }
             override fun afterTextChanged(p0: Editable?) {}
-    })
+        })
 
         return view
     }

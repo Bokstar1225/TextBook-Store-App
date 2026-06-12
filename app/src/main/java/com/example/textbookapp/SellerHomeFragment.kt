@@ -32,10 +32,21 @@ class SellerHomeFragment : Fragment() {
             Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
         )
 
-        val adapter = BookAdapter(books, buttonText = "Add to Storefront") { selectedBook ->
-            store.addToStore(selectedBook)
-            Toast.makeText(requireContext(), "${selectedBook.title} added to storefront!", Toast.LENGTH_SHORT).show()
-        }
+        val adapter = BookAdapter(
+            fullBookList = books,
+            buttonText = "Add to Storefront",
+            onBookClick = { selectedBook ->
+                val detailFragment = BookDetailFragment.newInstance(selectedBook, isSeller = true)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, detailFragment)
+                    .addToBackStack(null)
+                    .commit()
+            },
+            onAddToCartClick = { selectedBook ->
+                store.addToStore(selectedBook)
+                Toast.makeText(requireContext(), "${selectedBook.title} added to storefront!", Toast.LENGTH_SHORT).show()
+            }
+        )
         recyclerView.adapter = adapter
 
         val searchBar : TextInputEditText = view.findViewById(R.id.et_search)
