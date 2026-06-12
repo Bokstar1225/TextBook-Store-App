@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TextbookApp">
         <activity
+            android:name=".SellerEnquireFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserEnquireFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".SellerMainActivity"
             android:exported="false" />
         <activity

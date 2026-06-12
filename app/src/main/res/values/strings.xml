@@ -50,8 +50,11 @@
 
     <!--UserEnquireFragment/SellerEnquireFragment String Resources-->
     <string name="enquire_text">Enquire</string>
-    <string name="enquire_text2">Have a question, need more information, or want to know more about a certain book? Click the button></string>
+    <string name="enquire_text2">Have a question, need more information, or want to know more about a certain book? Click the button</string>
     <string name="enquire_btn_text">Enquire</string>
+    <string name="enquire_form_text">Enquire Form</string>
+    <string name="message_hint">Message</string>
+    <string name="enquire_btn_text2">Send Enquire</string>
 
     <!--UserCartFragment/SellerCartFragment String Resources-->
     <string name="cart_text">Cart</string>

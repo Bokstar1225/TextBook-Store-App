@@ -1,5 +1,6 @@
 package com.example.textbookapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +22,8 @@ class SellerEnquireFragment : Fragment() {
         val enquireButton: Button = view.findViewById(R.id.enquireButton)
 
         enquireButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Enquiry sent to buyer!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), SellerEnquireFormActivity::class.java)
+            startActivity(intent)
         }
         return view
     }
