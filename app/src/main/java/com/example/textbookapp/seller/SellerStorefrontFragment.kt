@@ -1,14 +1,17 @@
-package com.example.textbookapp
+package com.example.textbookapp.seller
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.textbookapp.R
+import com.example.textbookapp.adapters.BookAdapter
+import com.example.textbookapp.data.Book
+import com.example.textbookapp.viewmodel.Storefront
 
 class SellerStorefrontFragment : Fragment() {
 
@@ -24,7 +27,7 @@ class SellerStorefrontFragment : Fragment() {
         // Section 1: Books Your Selling
         val rvSelling: RecyclerView = view.findViewById(R.id.rv_selling_items)
         rvSelling.layoutManager = GridLayoutManager(requireContext(), 2)
-        
+
         storefront.storeItems.observe(viewLifecycleOwner) { items ->
             // Use BookAdapter but hide the button as per the UI image
             rvSelling.adapter = BookAdapter(items, showButton = false)
@@ -41,8 +44,8 @@ class SellerStorefrontFragment : Fragment() {
         // Initial setup for Sold items (Demo data to match image)
         if (storefront.soldItems.value.isNullOrEmpty()) {
              val demoSold = listOf(
-                Book(3, "Engineering Fundamentals", "R1700", R.drawable.engineering_textbook),
-                Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
+                 Book(3, "Engineering Fundamentals", "R1700", R.drawable.engineering_textbook),
+                 Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
             )
             demoSold.forEach { storefront.soldItems.value?.add(it) }
         }

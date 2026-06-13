@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +16,7 @@ class Cart : ViewModel() {
         val currentList = _cartItems.value ?: mutableListOf()
         currentList.add(book)
         _cartItems.value = currentList
-        
+
         // Trigger the event
         _itemAddedEvent.value = book
     }

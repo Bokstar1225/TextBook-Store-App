@@ -9,6 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.textbookapp.data.Book
+import com.example.textbookapp.data.Cart
+import com.example.textbookapp.viewmodel.Storefront
 import com.google.android.material.button.MaterialButton
 
 class BookDetailFragment : Fragment() {

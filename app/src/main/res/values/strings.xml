@@ -1,6 +1,6 @@
 <resources>
     <!--MainActivity String Resources-->
-    <string name="app_name">Textbook App</string>
+    <string name="app_name">BookUbuntu</string>
     <string name="app_icon">Africa Content Icon</string>
     <string name="main_heading">BookUbuntu</string>
     <string name="sub_heading">Your Digital Gateway to Knowledge</string>
@@ -63,6 +63,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--SellerStorefrontFragment String Resources-->
+    <string name="storefront_text">Storefront</string>
     <string name="selling_text">Books Your Selling</string>
     <string name="sold_text">Books You Have Sold</string>
 </resources>

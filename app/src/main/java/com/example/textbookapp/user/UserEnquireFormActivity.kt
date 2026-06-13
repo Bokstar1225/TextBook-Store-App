@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.textbookapp.R
+import com.example.textbookapp.user.UserMainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class SellerEnquireFormActivity : AppCompatActivity() {
+class UserEnquireFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_seller_enquire_form)
+        setContentView(R.layout.activity_user_enquire_form)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -79,10 +81,11 @@ class SellerEnquireFormActivity : AppCompatActivity() {
 
         if(isValid){
             // Proceed with registration logic
-            Toast.makeText(this, "Enquire sent to buyer", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, SellerMainActivity::class.java)
+            Toast.makeText(this, "Enquire sent to seller", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, UserMainActivity::class.java)
             startActivity(intent)
             finish()
+
         }
     }
 }

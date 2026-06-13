@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.seller
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.textbookapp.R
+import com.example.textbookapp.seller.SellerMainActivity
+import com.example.textbookapp.viewmodel.Authentication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

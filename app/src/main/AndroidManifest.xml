@@ -12,28 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TextbookApp">
         <activity
-            android:name=".SellerEnquireFormActivity"
+            android:name=".seller.SellerEnquireFormActivity"
             android:exported="false" />
         <activity
-            android:name=".UserEnquireFormActivity"
+            android:name=".user.UserEnquireFormActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerMainActivity"
+            android:name=".seller.SellerMainActivity"
             android:exported="false" />
         <activity
-            android:name=".UserMainActivity"
+            android:name=".user.UserMainActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerLoginActivity"
+            android:name=".seller.SellerLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".UserLoginActivity"
+            android:name=".user.UserLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerSignUpActivity"
+            android:name=".seller.SellerSignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".UserSignUpActivity"
+            android:name=".user.UserSignUpActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

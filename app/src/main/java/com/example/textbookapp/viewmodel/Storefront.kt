@@ -1,8 +1,9 @@
-package com.example.textbookapp
+package com.example.textbookapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.textbookapp.data.Book
 
 class Storefront : ViewModel() {
     private val _storeItems = MutableLiveData<MutableList<Book>>(mutableListOf())

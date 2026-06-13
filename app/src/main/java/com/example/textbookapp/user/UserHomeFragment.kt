@@ -1,7 +1,8 @@
-package com.example.textbookapp
+package com.example.textbookapp.user
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.textbookapp.BookDetailFragment
+import com.example.textbookapp.R
+import com.example.textbookapp.adapters.BookAdapter
+import com.example.textbookapp.data.Book
+import com.example.textbookapp.data.Cart
 import com.google.android.material.textfield.TextInputEditText
 
 class UserHomeFragment : Fragment() {
@@ -27,7 +33,12 @@ class UserHomeFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         val books = listOf(
-            Book(1, "Computer Science Course Companion", "R2100", R.drawable.computer_science_textbook),
+            Book(
+                1,
+                "Computer Science Course Companion",
+                "R2100",
+                R.drawable.computer_science_textbook
+            ),
             Book(2, "Philosophy A Complete Introduction", "R1000", R.drawable.philosophy_textbook),
             Book(3, "Engineering Fundamentals", "R1700", R.drawable.engineering_textbook),
             Book(4, "A Textbook of Physics", "R2000", R.drawable.physics_textbook)
@@ -36,7 +47,7 @@ class UserHomeFragment : Fragment() {
         val adapter = BookAdapter(
             fullBookList = books,
             onBookClick = { selectedBook ->
-                val detailFragment = BookDetailFragment.newInstance(selectedBook)
+                val detailFragment = BookDetailFragment.Companion.newInstance(selectedBook)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, detailFragment)
                     .addToBackStack(null)
@@ -57,7 +68,7 @@ class UserHomeFragment : Fragment() {
 
         val searchBar : TextInputEditText = view.findViewById(R.id.et_search)
 
-        searchBar.addTextChangedListener(object : android.text.TextWatcher{
+        searchBar.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 adapter.filter(p0.toString())

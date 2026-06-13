@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.textbookapp.R
+import com.example.textbookapp.viewmodel.Authentication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -23,7 +25,7 @@ class UserSignUpActivity : AppCompatActivity() {
 
         // Initialize Authentication ViewModel
         auth = ViewModelProvider(this)[Authentication::class.java]
-        
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -33,7 +35,7 @@ class UserSignUpActivity : AppCompatActivity() {
         val tilName = findViewById<TextInputLayout>(R.id.tilName)
         val tilEmail = findViewById<TextInputLayout>(R.id.tilEmail)
         val tilPassword = findViewById<TextInputLayout>(R.id.tilPassword)
-        
+
         val etName = findViewById<TextInputEditText>(R.id.etName)
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)

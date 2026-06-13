@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.data
 
 //Data class that holds the book information
 data class Book(

@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.textbookapp.R
+import com.example.textbookapp.data.Book
 
 class BookAdapter(
     private val fullBookList: List<Book>,
@@ -35,11 +37,11 @@ class BookAdapter(
         holder.titleText.text = book.title
         holder.priceText.text = book.price
         holder.coverImage.setImageResource(book.imageResId)
-        
+
         holder.coverImage.setOnClickListener {
             onBookClick(book)
         }
-        
+
         if (showButton) {
             holder.addToCartButton.visibility = View.VISIBLE
             holder.addToCartButton.text = buttonText

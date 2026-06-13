@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.seller
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,16 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.textbookapp.R
+import com.example.textbookapp.viewmodel.Authentication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class UserLoginActivity : AppCompatActivity() {
+class SellerSignUpActivity : AppCompatActivity() {
 
     private lateinit var auth : Authentication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_user_login)
+        setContentView(R.layout.activity_seller_sign_up)
 
         // Initialize Authentication ViewModel
         auth = ViewModelProvider(this)[Authentication::class.java]
@@ -30,25 +32,37 @@ class UserLoginActivity : AppCompatActivity() {
             insets
         }
 
+        val tilName = findViewById<TextInputLayout>(R.id.tilName)
         val tilEmail = findViewById<TextInputLayout>(R.id.tilEmail)
         val tilPassword = findViewById<TextInputLayout>(R.id.tilPassword)
 
+        val etName = findViewById<TextInputEditText>(R.id.etName)
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
+        val btnSignUp = findViewById<Button>(R.id.btnSignUp)
 
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        btnLogin.setOnClickListener {
-            validateInput(tilEmail, etEmail, tilPassword, etPassword)
+        btnSignUp.setOnClickListener {
+            validateInput(tilName, etName, tilEmail, etEmail, tilPassword, etPassword)
         }
     }
     private fun validateInput(
+        tilName: TextInputLayout, etName: TextInputEditText,
         tilEmail: TextInputLayout, etEmail: TextInputEditText,
         tilPassword: TextInputLayout, etPassword: TextInputEditText
     ) {
+        val name = etName.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
 
         var isValid = true
+
+        // Name validation
+        if (name.isEmpty()) {
+            tilName.error = "Name is required"
+            isValid = false
+        } else {
+            tilName.error = null
+        }
 
         // Email validation
         if (email.isEmpty()) {
@@ -74,14 +88,14 @@ class UserLoginActivity : AppCompatActivity() {
 
         if (isValid) {
             // Proceed with registration logic
-            if (auth.login(email, password)) {
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, UserMainActivity::class.java)
+            if(auth.signUp(email, password)){
+                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, SellerLoginActivity::class.java)
                 startActivity(intent)
                 finish()
 
-            } else {
-                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
             }
         }
     }

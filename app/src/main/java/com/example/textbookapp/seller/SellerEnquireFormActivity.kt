@@ -1,4 +1,4 @@
-package com.example.textbookapp
+package com.example.textbookapp.seller
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,21 +9,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
+import com.example.textbookapp.R
+import com.example.textbookapp.seller.SellerMainActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class SellerSignUpActivity : AppCompatActivity() {
-
-    private lateinit var auth : Authentication
+class SellerEnquireFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_seller_sign_up)
-
-        // Initialize Authentication ViewModel
-        auth = ViewModelProvider(this)[Authentication::class.java]
-        
+        setContentView(R.layout.activity_seller_enquire_form)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -32,25 +27,26 @@ class SellerSignUpActivity : AppCompatActivity() {
 
         val tilName = findViewById<TextInputLayout>(R.id.tilName)
         val tilEmail = findViewById<TextInputLayout>(R.id.tilEmail)
-        val tilPassword = findViewById<TextInputLayout>(R.id.tilPassword)
-        
+        val tilMessage = findViewById<TextInputLayout>(R.id.tilMessage)
+
         val etName = findViewById<TextInputEditText>(R.id.etName)
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
-        val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
-        val btnSignUp = findViewById<Button>(R.id.btnSignUp)
+        val etMessage = findViewById<TextInputEditText>(R.id.etMessage)
 
-        btnSignUp.setOnClickListener {
-            validateInput(tilName, etName, tilEmail, etEmail, tilPassword, etPassword)
+        val btnEnquire = findViewById<Button>(R.id.btnEnquire)
+        btnEnquire.setOnClickListener {
+            validateInput(tilName, etName, tilEmail, etEmail, tilMessage, etMessage)
         }
     }
+
     private fun validateInput(
         tilName: TextInputLayout, etName: TextInputEditText,
         tilEmail: TextInputLayout, etEmail: TextInputEditText,
-        tilPassword: TextInputLayout, etPassword: TextInputEditText
+        tilMessage: TextInputLayout, etMessage: TextInputEditText
     ) {
         val name = etName.text.toString().trim()
         val email = etEmail.text.toString().trim()
-        val password = etPassword.text.toString().trim()
+        val message = etMessage.text.toString().trim()
 
         var isValid = true
 
@@ -58,43 +54,37 @@ class SellerSignUpActivity : AppCompatActivity() {
         if (name.isEmpty()) {
             tilName.error = "Name is required"
             isValid = false
-        } else {
+
+        }else{
             tilName.error = null
         }
 
-        // Email validation
-        if (email.isEmpty()) {
+        if(email.isEmpty()){
             tilEmail.error = "Email is required"
             isValid = false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             tilEmail.error = "Enter a valid email address"
             isValid = false
-        } else {
+
+        }else{
             tilEmail.error = null
         }
 
-        // Password validation
-        if (password.isEmpty()) {
-            tilPassword.error = "Password is required"
+        if(message.isEmpty()){
+            tilMessage.error = "Message is required"
             isValid = false
-        } else if (password.length < 6) {
-            tilPassword.error = "Password must be at least 6 characters"
-            isValid = false
-        } else {
-            tilPassword.error = null
+
+        }else{
+            tilMessage.error = null
         }
 
-        if (isValid) {
+        if(isValid){
             // Proceed with registration logic
-            if(auth.signUp(email, password)){
-                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, SellerLoginActivity::class.java)
-                startActivity(intent)
-                finish()
-
-            }else{
-                Toast.makeText(this, "Email already exists", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, "Enquire sent to buyer", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SellerMainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

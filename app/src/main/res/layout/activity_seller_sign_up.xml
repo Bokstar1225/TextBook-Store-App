@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5E9DA"
-    tools:context=".SellerSignUpActivity">
+    tools:context=".seller.SellerSignUpActivity">
 
     <ImageView
         android:id="@+id/imageView"

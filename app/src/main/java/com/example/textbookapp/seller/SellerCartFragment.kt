@@ -1,16 +1,18 @@
-package com.example.textbookapp
+package com.example.textbookapp.seller
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.textbookapp.R
+import com.example.textbookapp.adapters.CartAdapter
+import com.example.textbookapp.data.Cart
 
 class SellerCartFragment : Fragment() {
 
